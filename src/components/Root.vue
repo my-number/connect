@@ -8,7 +8,7 @@ import store from "../store/index";
 
 const commandRoute = {
   getAuthCert: "/get-auth-cert",
-  signWithAuth: "/sign-with-auth",
+  signWithAuth: "/sign-with-auth"
   // other command is not implemented
 };
 
@@ -17,16 +17,19 @@ export default {
   computed: {
     commandType() {
       return this.$store.state.commandType;
-    },
+    }
   },
   watch: {
     commandType() {
-      [];
       this.next();
-    },
+    }
   },
   methods: {
     next() {
+      if (!window.opener) {
+        this.$router.replace("/404");
+        return;
+      }
       if (this.commandType == "") {
         return;
       }
@@ -34,14 +37,13 @@ export default {
       if (route) {
         this.$router.replace(route);
       } else {
-        console.log("404");
         this.$router.replace("/404");
       }
-    },
+    }
   },
   mounted() {
     this.next();
-  },
+  }
 };
 </script>
 

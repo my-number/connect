@@ -13,9 +13,9 @@ import Modals from "./components/Modals.vue";
 export default {
   components: { Container, Modals },
   mounted() {
+    this.$router.push("/");
     this.$store.dispatch("onLoad");
-    this.$router.replace("/");
-  },
+  }
 };
 </script>
 

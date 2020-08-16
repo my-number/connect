@@ -5,6 +5,7 @@ import RequestPermission from "./components/RequestPermission/index";
 import Password from "./components/Password.vue";
 import SelectReader from "./components/SelectReader.vue";
 import InsertCard from "./components/InsertCard.vue";
+import NotFound from "./components/NotFound.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -14,10 +15,11 @@ const routes = [
   { path: "/password", component: Password },
   { path: "/select-reader", component: SelectReader },
   { path: "/insert-card", component: InsertCard },
+  { path: "/404", component: NotFound }
 ];
 
 const router = new VueRouter({
   routes,
-  mode: "abstract",
+  mode: "abstract"
 });
 export default router;

@@ -10,7 +10,8 @@
       </div>
     </div>
     <div class="alert-box">
-      呼び出し元のURLは本当に正しいですか？今一度ご確認をお願いします。
+      呼び出し元のURLは
+      <b>{{ $store.state.channel.remoteOrigin }}</b> で間違いありませんか？
     </div>
     <div class="actions">
       <btn @click="allow">許可</btn>
@@ -30,8 +31,8 @@ export default {
   props: {
     appName: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   methods: {
     allow() {
@@ -40,10 +41,10 @@ export default {
     deny() {
       this.$store.state.channel.sendResult({
         success: false,
-        cancelled: true,
+        cancelled: true
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
