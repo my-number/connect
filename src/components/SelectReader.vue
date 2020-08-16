@@ -88,7 +88,7 @@ export default {
     isWebUSBAvailable: false,
     loading: true,
     timerId: null,
-    error: false,
+    error: false
   }),
   components: { BackBtn, List, ListItem, Spinner, Btn },
   methods: {
@@ -97,7 +97,7 @@ export default {
         const readers = await getReaders();
         this.error = false;
         this.$set(this, "readers", readers);
-        const autoselectable = readers.filter((reader) => !reader.error);
+        const autoselectable = readers.filter(reader => !reader.error);
         if (autoselectable.length > 1) {
           this.selectReader(autoselectable[0]);
         }
@@ -139,7 +139,7 @@ export default {
         pcscConst.SCARD_E_NOT_READY,
         pcscConst.SCARD_E_NO_ACCESS,
         pcscConst.SCARD_W_UNRESPONSIVE_CARD,
-        pcscConst.SCARD_W_UNSUPPORTED_CARD,
+        pcscConst.SCARD_W_UNSUPPORTED_CARD
       ].indexOf(errcode);
     },
     goToInstaller() {
@@ -148,7 +148,7 @@ export default {
         "_blank",
         "noopener=1"
       );
-    },
+    }
   },
   mounted() {
     this.timer = setInterval(this.getReader, INTERVAL);
@@ -156,7 +156,7 @@ export default {
   },
   beforeDestroy() {
     clearInterval(this.timer);
-  },
+  }
 };
 </script>
 

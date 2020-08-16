@@ -12,8 +12,8 @@ async function callRemote(method: string, params?: any[]): Promise<any> {
       jsonrpc: "2.0",
       id,
       method,
-      params,
-    },
+      params
+    }
   });
   if (result.data.error) {
     throw result.data.error;

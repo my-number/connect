@@ -21,7 +21,7 @@ export default {
   name: "SignWithAuth",
   components: {
     RequestPermission,
-    TooltipItem,
-  },
+    TooltipItem
+  }
 };
 </script>

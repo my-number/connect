@@ -11,14 +11,14 @@ export default {
   props: {
     textId: {
       type: String,
-      required: false, // false for now
-    },
+      required: false // false for now
+    }
   },
   methods: {
     showTooltip() {
       return false;
-    },
-  },
+    }
+  }
 };
 </script>
 

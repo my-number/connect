@@ -50,11 +50,11 @@ export default Vue.extend({
   data() {
     return {
       value: "",
-      pads: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      pads: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     };
   },
   props: {
-    autofocus: Boolean,
+    autofocus: Boolean
   },
   methods: {
     shuffle() {
@@ -89,11 +89,11 @@ export default Vue.extend({
       if (key == 13) {
         this.submit();
       }
-    },
+    }
   },
   mounted() {
     this.autofocus && this.$refs.keypadInput.focus();
-  },
+  }
 });
 </script>
 <style lang="scss">

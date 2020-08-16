@@ -7,7 +7,7 @@ export class Channel {
   remoteOrigin = "*";
   events: { [name: string]: Array<(data: any) => void> } = {};
   constructor() {
-    window.addEventListener("message", (e) => {
+    window.addEventListener("message", e => {
       if (e.origin === this.remoteOrigin || this.remoteOrigin === "*") {
         this.handleEvent(e.data);
       }
@@ -28,7 +28,7 @@ export class Channel {
     if (!evt || !evt.length) {
       return;
     }
-    this.events[typeName] = evt.filter((fn) => fn == handler);
+    this.events[typeName] = evt.filter(fn => fn == handler);
   }
 
   tellReady() {
@@ -38,7 +38,7 @@ export class Channel {
     window.opener.postMessage(
       {
         type: typeName,
-        data,
+        data
       },
       this.remoteOrigin
     );
@@ -46,7 +46,7 @@ export class Channel {
 
   waitOnce(typeName: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      const handler = (data) => {
+      const handler = data => {
         this.off(typeName, handler);
         resolve(data);
       };

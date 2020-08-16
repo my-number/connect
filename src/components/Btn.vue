@@ -9,17 +9,17 @@ export default {
   props: {
     transparent: Boolean,
     caution: Boolean,
-    inline: Boolean,
+    inline: Boolean
   },
   computed: {
     classes() {
       return {
         transparent: this.transparent,
         caution: this.caution,
-        inline: this.inline,
+        inline: this.inline
       };
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

@@ -25,14 +25,14 @@ export default {
   components: { Btn },
   name: "SignPassword",
   data: () => ({
-    more: false,
+    more: false
   }),
   props: {},
   methods: {
     onSubmit(pin) {
       this.$emit("submit", pin);
-    },
-  },
+    }
+  }
 };
 </script>
 

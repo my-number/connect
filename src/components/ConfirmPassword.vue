@@ -29,7 +29,7 @@ import Btn from "./Btn.vue";
 export default {
   components: { Btn },
   name: "ConfirmPassword",
-  props: {},
+  props: {}
 };
 </script>
 

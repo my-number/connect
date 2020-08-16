@@ -22,7 +22,7 @@ export default {
   name: "GetAuthCert",
   components: {
     RequestPermission,
-    TooltipItem,
-  },
+    TooltipItem
+  }
 };
 </script>

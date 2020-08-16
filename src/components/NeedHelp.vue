@@ -10,8 +10,8 @@ export default {
   components: { Btn },
   name: "NeedHelp",
   props: {
-    textId: String,
-  },
+    textId: String
+  }
 };
 </script>
 

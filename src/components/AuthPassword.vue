@@ -43,14 +43,14 @@ export default {
       pinRemaining:
         this.$store.state.selectedReader.mynumberCardInfo?.authPinRemaining ||
         -1, // -1 means no data
-      more: false,
+      more: false
     };
   },
   methods: {
     onSubmit(pin) {
       passwordRegex.test(pin) && this.$emit("submit", pin);
-    },
-  },
+    }
+  }
 };
 </script>
 

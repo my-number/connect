@@ -15,8 +15,8 @@ export default {
   props: {
     button: Boolean,
     header: Boolean,
-    icon: String,
-  },
+    icon: String
+  }
 };
 </script>
 

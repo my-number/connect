@@ -11,7 +11,7 @@ export default new Vuex.Store({
     selectedReader: null,
     sigHash: "",
     channel: new Channel(),
-    modal: null,
+    modal: null
   }),
   mutations: {
     setSigHash(state, sigHash) {
@@ -31,7 +31,7 @@ export default new Vuex.Store({
     },
     setModal(state, name) {
       state.modal = name;
-    },
+    }
   },
   actions: {
     async onLoad({ state, commit }) {
@@ -39,7 +39,7 @@ export default new Vuex.Store({
       commit("setCommandType", data.commandType);
       commit("setAppName", data.appName);
       data.sigHash && commit("setSigHash", data.sigHash);
-    },
+    }
   },
-  modules: {},
+  modules: {}
 });

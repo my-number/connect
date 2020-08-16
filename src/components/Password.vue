@@ -19,15 +19,15 @@ export default {
   computed: {
     commandType() {
       return this.$store.state.commandType;
-    },
+    }
   },
   props: {},
   methods: {
     next(pin) {
       this.$store.commit("setPin", pin);
       this.$router.push("/insert-card");
-    },
-  },
+    }
+  }
 };
 </script>
 

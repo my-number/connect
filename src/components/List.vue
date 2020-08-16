@@ -8,8 +8,8 @@
 export default {
   name: "List",
   props: {
-    inset: Boolean,
-  },
+    inset: Boolean
+  }
 };
 </script>
 
