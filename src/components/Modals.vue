@@ -55,6 +55,20 @@
         <Btn caution @click="exitWithError">終了する</Btn>
       </div>
     </div>
+    <div class="error modal" :class="{ show: showing == 'failure' }">
+      <div class="icon">
+        <span class="icon-error_outline"></span>
+      </div>
+      <div class="title">読み取りに失敗しました</div>
+      <div class="description">
+        しっかりとカードを挿入してください。
+      </div>
+      <div class="action">
+        <Btn transparent @click="$store.commit('setModal', null)"
+          >やりなおす</Btn
+        >
+      </div>
+    </div>
   </div>
 </template>
 
@@ -85,20 +99,20 @@ export default {
         return reader.mynumberCardInfo?.signPinRemaining;
       }
       return 114514;
-    },
+    }
   },
   methods: {
     exitWithError() {
       this.$store.state.channel.sendResult({
         success: false,
-        error: true,
+        error: true
       });
     },
     back() {
       this.$store.commit("setModal", null);
       this.$router.go(-1);
-    },
-  },
+    }
+  }
 };
 </script>
 

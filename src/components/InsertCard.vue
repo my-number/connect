@@ -16,6 +16,7 @@ import { computeAuthSig, getAuthCert } from "../rpc";
 import {
   SCARD_E_NO_SMARTCARD,
   SCARD_W_REMOVED_CARD,
+  SCARD_E_COMM_DATA_LOST
 } from "../utils/pcsc-consts";
 
 const INTERVAL = 1000;
@@ -39,27 +40,27 @@ export default {
           Promise.reject(new Error("Unimplemented"));
       }
     },
-    _execute() {
+    async _execute() {
       if (!this.timerEnabled) {
         return;
       }
-
-      return this.execute()
-        .then((result) => {
-          this.timerEnabled = false;
-          this.handleSuccess(result);
-        })
-        .catch((e) => {
-          if (
-            e.data == SCARD_E_NO_SMARTCARD ||
-            e.data == SCARD_W_REMOVED_CARD
-          ) {
-            setTimeout(this._execute, INTERVAL);
-            return;
-          }
-          this.timerEnabled = false;
-          this.handleError(e);
-        });
+      try {
+        const result = await this.execute();
+        this.timerEnabled = false;
+        this.handleSuccess(result);
+      } catch (e) {
+        if (e.data == SCARD_E_NO_SMARTCARD || e.data == SCARD_W_REMOVED_CARD) {
+          setTimeout(this._execute, INTERVAL);
+          return;
+        }
+        if (e.data == SCARD_E_COMM_DATA_LOST) {
+          setTimeout(this._execute, INTERVAL);
+          this.handleFailure();
+          return;
+        }
+        this.timerEnabled = false;
+        this.handleError(e);
+      }
     },
     handleError(e) {
       if (e.code == -4) {
@@ -89,10 +90,16 @@ export default {
       setTimeout(() => {
         this.$store.state.channel.sendResult({
           success: true,
-          ...data,
+          ...data
         });
       }, 3000);
     },
+    handleFailure() {
+      this.$store.commit("setModal", "failure");
+      setTimeout(() => {
+        this.$store.state == "failure" && this.$store.commit("setModal", null);
+      }, 2000);
+    }
   },
   mounted() {
     this.timerEnabled = true;
@@ -100,7 +107,7 @@ export default {
   },
   beforeDestroy() {
     this.timerEnabled = false;
-  },
+  }
 };
 </script>
 
