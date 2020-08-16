@@ -13,7 +13,10 @@
 <script lang="ts">
 import BackBtn from "./BackBtn.vue";
 import { computeAuthSig, getAuthCert } from "../rpc";
-import { SCARD_E_NO_SMARTCARD } from "../utils/pcsc-consts";
+import {
+  SCARD_E_NO_SMARTCARD,
+  SCARD_W_REMOVED_CARD,
+} from "../utils/pcsc-consts";
 
 const INTERVAL = 1000;
 export default {
@@ -47,7 +50,10 @@ export default {
           this.handleSuccess(result);
         })
         .catch((e) => {
-          if (e.data == SCARD_E_NO_SMARTCARD) {
+          if (
+            e.data == SCARD_E_NO_SMARTCARD ||
+            e.data == SCARD_W_REMOVED_CARD
+          ) {
             setTimeout(this._execute, INTERVAL);
             return;
           }

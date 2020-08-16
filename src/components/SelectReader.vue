@@ -123,7 +123,10 @@ export default {
       }
     },
     isNoCard(errcode: number) {
-      return errcode == pcscConst.SCARD_E_NO_SMARTCARD;
+      return (
+        errcode == pcscConst.SCARD_E_NO_SMARTCARD ||
+        errcode == pcscConst.SCARD_W_REMOVED_CARD
+      );
     },
     isSharingViolation(errcode: number) {
       return errcode == pcscConst.SCARD_E_SHARING_VIOLATION;
