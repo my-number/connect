@@ -22,7 +22,7 @@
         デーモンをインストールし、起動してください。
         <br />
         起動が完了したら自動的に表示されます。
-        <btn transparent>インストールページへ</btn>
+        <btn transparent @click="goToInstaller">インストールページへ</btn>
       </div>
 
       <list inset v-show="readers.length > 0">
@@ -138,6 +138,13 @@ export default {
         pcscConst.SCARD_W_UNRESPONSIVE_CARD,
         pcscConst.SCARD_W_UNSUPPORTED_CARD,
       ].indexOf(errcode);
+    },
+    goToInstaller() {
+      window.open(
+        "https://my-number.github.io/mynad/INSTALL",
+        "_blank",
+        "noopener=1"
+      );
     },
   },
   mounted() {
