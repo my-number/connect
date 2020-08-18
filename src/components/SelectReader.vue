@@ -48,7 +48,7 @@
               class="status sharing-violation"
               v-show="isSharingViolation(reader.error)"
             >
-              別のプロセスが利用中
+              別のアプリが利用中
             </span>
             <span class="status error" v-show="isFatalError(reader.error)">
               エラーあり

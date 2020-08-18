@@ -16,7 +16,8 @@ import { computeAuthSig, getAuthCert } from "../rpc";
 import {
   SCARD_E_NO_SMARTCARD,
   SCARD_W_REMOVED_CARD,
-  SCARD_E_COMM_DATA_LOST
+  SCARD_E_COMM_DATA_LOST,
+  SCARD_E_SHARING_VIOLATION
 } from "../utils/pcsc-consts";
 
 const INTERVAL = 1000;
@@ -53,7 +54,10 @@ export default {
           setTimeout(this._execute, INTERVAL);
           return;
         }
-        if (e.data == SCARD_E_COMM_DATA_LOST) {
+        if (
+          e.data == SCARD_E_COMM_DATA_LOST ||
+          e.data == SCARD_E_SHARING_VIOLATION
+        ) {
           setTimeout(this._execute, INTERVAL);
           this.handleFailure();
           return;
@@ -97,7 +101,8 @@ export default {
     handleFailure() {
       this.$store.commit("setModal", "failure");
       setTimeout(() => {
-        this.$store.state == "failure" && this.$store.commit("setModal", null);
+        this.$store.state.modal == "failure" &&
+          this.$store.commit("setModal", null);
       }, 2000);
     }
   },
