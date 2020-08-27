@@ -6,9 +6,13 @@
         戻る
       </back-btn>
       <div class="title">カードリーダー設定</div>
-      <div class="message" v-show="readers.length > 0 && !error">
+      <div class="message" v-show="readers.length > 0 && !error && !isReselect">
         カードリーダーの自動設定がうまくできませんでした。 <br />
-        お手数ですが使用するカードリーダーを選択してください。
+        お手数ですが使用するカードリーダーを選択してください。 <br />
+        またはマイナンバーカードを挿入してください。自動的に認識・設定されます。
+      </div>
+      <div class="message" v-show="isReselect">
+        使用するカードリーダーを選択してください。
       </div>
       <div class="message" v-show="readers.length == 0 && !error">
         カードリーダーが見つかりませんでした <br />
@@ -88,17 +92,27 @@ export default {
     isWebUSBAvailable: false,
     loading: true,
     timerId: null,
-    error: false
+    error: false,
+    isReselect: false
   }),
   components: { BackBtn, List, ListItem, Spinner, Btn },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      if (from.fullPath === "/insert-card" || from.fullPath === "/password") {
+        vm.isReselect = true;
+      }
+    });
+  },
   methods: {
     async getReader() {
       try {
         const readers = await getReaders();
         this.error = false;
         this.$set(this, "readers", readers);
-        const autoselectable = readers.filter(reader => !reader.error);
-        if (autoselectable.length > 1) {
+        const autoselectable = readers.filter(
+          reader => !reader.error && reader.mynumberCardInfo
+        );
+        if (autoselectable.length == 1 && !this.isReselect) {
           this.selectReader(autoselectable[0]);
         }
       } catch (e) {
