@@ -2,7 +2,7 @@
   <div class="keypad">
     <div class="inputbox">
       <input
-        type="text"
+        type="password"
         pattern="^[0-9]{0,4}$"
         v-model="value"
         @keydown="keyboardInput"
